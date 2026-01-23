@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  /* Definimos variables del tema aquí */
+  --font-serif: var(--font-serif);
+  --color-brand-pink: #EF5DA8;
+  
+  /* Animaciones personalizadas registradas en el tema */
+  --animate-spin-slow: spin-slow 20s linear infinite;
+  --animate-spin-reverse: spin-reverse 25s linear infinite;
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes spin-reverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+}
+
+/* --- ESTILOS GLOBALES (CSS Estándar) --- */
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* Usamos CSS normal en lugar de @apply para evitar errores de compilación */
+  background-color: black;
+  color: white;
+  overflow-x: hidden; /* Evita el baile horizontal en móviles */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Estilos de selección de texto (Rosa Neón) */
+::selection {
+  background-color: #EF5DA8;
+  color: white;
+}
+
+/* --- BARRA DE SCROLL DE LUJO --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090b; /* Zinc-950 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #EF5DA8; /* Se ilumina en rosa al tocarla */
+}
+
+/* --- UTILIDADES --- */
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility writing-vertical {
+  writing-mode: vertical-rl;
+}
