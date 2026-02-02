@@ -22,14 +22,14 @@ export default function Preloader() {
         >
           <div className="relative flex flex-col items-center">
             
-            {/* Contenedor con ancho fijo para evitar logo gigante */}
+            {/* Contenedor con ancho fijo */}
             <div className="w-48 md:w-64 h-auto relative z-10">
               <motion.img
                 src="/img/logo-mipiel-white.png" 
                 alt="Logo MIPIEL"
                 className="w-full h-auto object-contain"
-                // INVERTIR COLOR: Como el logo es blanco, lo invertimos a negro para verlo en fondo blanco
-                style={{ filter: "invert(1)" }} 
+                // CORRECCIÓN: brightness(0) fuerza el logo a NEGRO PURO (Silueta)
+                style={{ filter: "brightness(0)" }} 
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, ease: "easeOut" }}

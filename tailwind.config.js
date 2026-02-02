@@ -6,11 +6,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: "#E5007E", // El nuevo Fucsia con más "punch"
+        secondary: "#9F5FB1",
+        foreground: "#2B2E35",
+      },
       fontFamily: {
         serif: ['var(--font-serif)', 'serif'],
       },
-      // NOTA: Los colores ya los definimos en globals.css
-      // Dejamos esto vacío para que lea los del CSS
     },
   },
   plugins: [],

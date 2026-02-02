@@ -1,43 +1,36 @@
 @import "tailwindcss";
 
 @theme {
-  /* Mantenemos tus fuentes originales */
-  --font-serif: var(--font-serif);
-
-  /* --- DEFINIMOS TUS NUEVOS COLORES AQUÍ --- */
-  /* Al ponerlos en @theme, Tailwind v4 los detecta automáticamente */
-  --color-primary: #C21E78;    /* Magenta */
-  --color-secondary: #9F5FB1;  /* Púrpura */
-  --color-background: #FFFFFF; /* Fondo Blanco */
-  --color-foreground: #2B2E35; /* Texto Oscuro */
-
-  /* Animaciones originales (No las tocamos) */
-  --animate-spin-slow: spin-slow 20s linear infinite;
-  --animate-spin-reverse: spin-reverse 25s linear infinite;
-
-  @keyframes spin-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  @keyframes spin-reverse {
-    from { transform: rotate(360deg); }
-    to { transform: rotate(0deg); }
-  }
-}
-
-/* --- ESTILOS DEL BODY --- */
-body {
-  /* Usamos las variables definidas arriba */
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-  font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+  /* DEFINICIÓN DE COLORES MIPIEL VIBRANTES */
+  --color-primary: #E5007E;    /* Fucsia más intenso y vibrante */
+  --color-secondary: #9F5FB1;  /* Púrpura de contraste */
+  --color-foreground: #2B2E35; 
+  --color-background: #FFFFFF; 
   
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --font-serif: var(--font-serif);
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+/* --- ESTILOS BASE --- */
+:root {
+  background-color: #FFFFFF;
+  color: #2B2E35;
+}
+
+body {
+  background-color: white;
+  color: #2B2E35;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Selección de texto con el nuevo Fucsia */
+::selection {
+  background-color: #E5007E;
+  color: white;
+}
+
+/* Scrollbar con el nuevo Fucsia */
+::-webkit-scrollbar-thumb {
+  background: #E5007E;
+  border-radius: 10px;
+}
