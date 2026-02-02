@@ -37,51 +37,51 @@ export default function Header() {
           layout
           initial={{ width: "100%", borderRadius: "0px", y: 0 }}
           animate={{ 
-            width: isScrolled ? "min(95%, 800px)" : "100%", // Un poco más ancho para elegancia
-            // CAMBIO CLAVE: Degradado Fucsia Metalizado en lugar de blanco plano
-            background: isScrolled 
-              ? "linear-gradient(135deg, #E5007E 0%, #FF2E9B 50%, #E5007E 100%)" 
-              : "rgba(255,255,255,0)",
+            width: isScrolled ? "min(95%, 900px)" : "100%",
+            // Fondo SÓLIDO #E5007E al bajar
+            backgroundColor: isScrolled ? "#E5007E" : "rgba(255,255,255,0)",
             borderRadius: isScrolled ? "9999px" : "0px",
-            // Sombra con brillo fucsia + brillo interno blanco (Efecto Metal)
             boxShadow: isScrolled 
-              ? "0 10px 25px -5px rgba(229,0,126,0.4), inset 0 2px 4px rgba(255,255,255,0.3)" 
+              ? "0 8px 20px -4px rgba(229, 0, 126, 0.4)" 
               : "none",
-            backdropFilter: isScrolled ? "blur(8px)" : "blur(0px)",
+            backdropFilter: isScrolled ? "blur(0px)" : "blur(0px)",
             y: isScrolled ? 10 : 0
           }}
-          transition={{ duration: 0.4, type: "spring", stiffness: 120, damping: 20 }}
-          className="pointer-events-auto flex items-center justify-between px-8 py-3 transition-all border border-transparent"
+          transition={{ duration: 0.3, type: "spring", stiffness: 100, damping: 20 }}
+          className="pointer-events-auto flex items-center justify-between px-8 py-3 transition-all"
         >
           
-          {/* LOGO: 
-              - Top: Negro (brightness-0)
-              - Scroll: Blanco original (sin filtro) para resaltar sobre fucsia 
-          */}
+          {/* LOGO */}
           <Link href="/" className="flex items-center gap-2 relative z-50 shrink-0">
-            <img 
+            <motion.img 
                src="/img/logo-mipiel-white.png" 
                alt="MIPIEL"
-               className={`h-7 md:h-8 w-auto object-contain transition-all duration-300 ${
-                 isScrolled ? "opacity-100" : "brightness-0 opacity-90"
-               }`}
+               className="h-7 md:h-8 w-auto object-contain transition-all duration-300"
+               style={{ 
+                 // LÓGICA LOGO:
+                 // Scrolled (Fondo Fucsia) -> BLANCO (invert)
+                 // Top (Fondo Transparente) -> NEGRO (original)
+                 filter: isScrolled 
+                   ? "brightness(0) invert(1)" 
+                   : "brightness(0)" 
+               }}
             />
           </Link>
 
           {/* NAV ESCRITORIO */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+          <nav className="hidden md:flex items-center gap-8">
             {menuItems.map((item) => {
               const isActive = pathname === item.href || (item.href === "/#productos" && pathname === "/");
               return (
                 <Link 
                   key={item.name} 
                   href={item.href} 
-                  // CAMBIO: Texto blanco al hacer scroll, gris/negro al estar arriba
-                  className={`text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-300 ${
+                  className={`text-[11px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 ${
+                    // AQUI APLICAMOS EL COLOR QUE FALTABA:
                     isScrolled 
-                      ? "text-white hover:text-white/80" 
-                      : `hover:text-black ${isActive ? "text-black font-extrabold" : "text-zinc-500"}`
-                  }`}
+                      ? "text-white hover:text-white/80" // Blanco sobre fondo Fucsia
+                      : "text-[#E5007E] hover:text-black" // FUCSIA sobre fondo Transparente
+                  } ${isActive && !isScrolled ? "font-extrabold border-b-2 border-[#E5007E]" : ""}`}
                 >
                   {item.name}
                 </Link>
@@ -90,8 +90,9 @@ export default function Header() {
           </nav>
 
           {/* ICONOS */}
-          <div className={`flex items-center gap-5 transition-colors duration-300 relative z-50 shrink-0 ${
-             isScrolled ? "text-white" : "text-zinc-800"
+          <div className={`flex items-center gap-6 transition-colors duration-300 relative z-50 shrink-0 ${
+             // Iconos Blancos al bajar, FUCSIA al estar arriba
+             isScrolled ? "text-white" : "text-[#E5007E]"
           }`}>
             <Search size={18} className="cursor-pointer hover:scale-110 transition-transform" />
             
@@ -101,11 +102,13 @@ export default function Header() {
                 {cartCount > 0 && (
                   <motion.span 
                     initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
-                    // CAMBIO: Badge invertido. Si el fondo es fucsia, el badge es blanco.
-                    className={`absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full text-[9px] flex items-center justify-center font-bold shadow-md ${
+                    // BADGE:
+                    // Si barra es Fucsia -> Badge Blanco (texto fucsia)
+                    // Si barra es Transparente -> Badge Negro (texto blanco) para contraste con iconos fucsia
+                    className={`absolute -top-1 -right-1 w-4 h-4 rounded-full text-[9px] flex items-center justify-center font-bold shadow-sm ${
                       isScrolled 
-                        ? "bg-white text-[#E5007E]" // Badge blanco sobre fondo fucsia
-                        : "bg-[#E5007E] text-white" // Badge fucsia sobre fondo blanco
+                        ? "bg-white text-[#E5007E]" 
+                        : "bg-black text-white" 
                     }`}
                   >
                     {cartCount}
@@ -122,7 +125,7 @@ export default function Header() {
         </motion.header>
       </div>
 
-      {/* MENÚ MÓVIL: Mantenemos fondo blanco limpio */}
+      {/* MENÚ MÓVIL */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
