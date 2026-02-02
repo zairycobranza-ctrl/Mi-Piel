@@ -1,5 +1,5 @@
 "use client";
-import { X, Trash2, MessageCircle, ArrowRight, ShoppingBag } from "lucide-react";
+import { X, Trash2, ArrowRight, ShoppingBag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "../context/CartContext";
 
@@ -27,7 +27,7 @@ export default function CartSidebar() {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* 1. OVERLAY OSCURO (Fondo) */}
+          {/* 1. OVERLAY OSCURO (Mantenemos el fondo oscuro para contraste) */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -42,46 +42,51 @@ export default function CartSidebar() {
             animate={{ x: "0%" }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-full max-w-md bg-zinc-950 border-l border-white/10 shadow-2xl z-[1000] flex flex-col"
+            // CAMBIO: bg-white (Blanco) y border-zinc-200 (Gris claro)
+            className="fixed top-0 right-0 h-full w-full max-w-md bg-white border-l border-zinc-200 shadow-2xl z-[1000] flex flex-col"
           >
             
             {/* CABECERA */}
-            <div className="p-6 border-b border-white/10 flex items-center justify-between">
-              <h2 className="text-xl font-serif text-white flex items-center gap-3">
+            <div className="p-6 border-b border-zinc-100 flex items-center justify-between">
+              {/* Texto Foreground (Oscuro) */}
+              <h2 className="text-xl font-serif text-foreground flex items-center gap-3">
                 <ShoppingBag size={20} />
                 Tu Bolsa ({items.length})
               </h2>
-              <button onClick={closeCart} className="p-2 hover:bg-white/10 rounded-full transition-colors">
-                <X size={24} className="text-zinc-400 hover:text-white" />
+              <button onClick={closeCart} className="p-2 hover:bg-zinc-100 rounded-full transition-colors">
+                <X size={24} className="text-zinc-400 hover:text-primary" />
               </button>
             </div>
 
             {/* LISTA DE PRODUCTOS */}
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
               {items.length === 0 ? (
-                <div className="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-50">
+                <div className="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-50 text-zinc-500">
                   <ShoppingBag size={48} strokeWidth={1} />
                   <p className="text-sm uppercase tracking-widest">Tu bolsa está vacía</p>
                 </div>
               ) : (
                 items.map((item) => (
                   <div key={item.id} className="flex gap-4 group">
-                    {/* Imagen Miniatura */}
-                    <div className="w-20 h-24 bg-zinc-900 rounded-lg overflow-hidden border border-white/5 shrink-0">
+                    {/* Imagen Miniatura: Fondo gris muy claro */}
+                    <div className="w-20 h-24 bg-zinc-50 rounded-lg overflow-hidden border border-zinc-200 shrink-0">
                       <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     </div>
                     
                     {/* Info */}
                     <div className="flex-1 flex flex-col justify-between py-1">
                       <div>
-                        <h3 className="text-sm font-bold text-white leading-tight mb-1">{item.name}</h3>
+                        {/* Nombre del producto en oscuro */}
+                        <h3 className="text-sm font-bold text-foreground leading-tight mb-1">{item.name}</h3>
                         <p className="text-xs text-zinc-500">Cantidad: {item.qty}</p>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium text-[#D4AF37]">{item.price}</span>
+                        {/* Precio: Color Primary (Magenta) en lugar de Dorado */}
+                        <span className="text-sm font-bold text-primary">{item.price}</span>
+                        
                         <button 
                           onClick={() => removeFromCart(item.id)}
-                          className="text-zinc-600 hover:text-red-500 transition-colors text-xs flex items-center gap-1"
+                          className="text-zinc-400 hover:text-red-500 transition-colors text-xs flex items-center gap-1"
                         >
                           <Trash2 size={14} /> Eliminar
                         </button>
@@ -94,21 +99,23 @@ export default function CartSidebar() {
 
             {/* FOOTER (Checkout) */}
             {items.length > 0 && (
-              <div className="p-6 border-t border-white/10 bg-zinc-900/50">
+              // CAMBIO: Fondo gris muy suave (zinc-50) para diferenciar el footer
+              <div className="p-6 border-t border-zinc-100 bg-zinc-50">
                 <div className="flex justify-between items-center mb-6">
-                  <span className="text-sm text-zinc-400 uppercase tracking-widest">Subtotal</span>
-                  <span className="text-2xl font-serif text-white">${cartTotal.toFixed(2)}</span>
+                  <span className="text-sm text-zinc-500 uppercase tracking-widest">Subtotal</span>
+                  <span className="text-2xl font-serif text-foreground font-medium">${cartTotal.toFixed(2)}</span>
                 </div>
                 
+                {/* BOTÓN: Fondo Magenta (Primary) con hover oscurecido */}
                 <button 
                   onClick={handleCheckout}
-                  className="w-full py-4 bg-white text-black font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-[#D4AF37] hover:text-white transition-all duration-300 group"
+                  className="w-full py-4 bg-primary text-white font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all duration-300 group rounded-lg"
                 >
                   Finalizar Pedido
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </button>
                 
-                <p className="text-center text-[10px] text-zinc-600 mt-4 uppercase tracking-wider">
+                <p className="text-center text-[10px] text-zinc-500 mt-4 uppercase tracking-wider">
                   Pago seguro vía WhatsApp
                 </p>
               </div>

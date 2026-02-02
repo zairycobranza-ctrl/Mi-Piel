@@ -8,8 +8,8 @@ import Preloader from "./components/Preloader";
 
 export default function Home() {
   return (
-    // Hemos quitado Header y Footer de aquí porque ya están en el layout.tsx
-    <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
+    // CORRECCIÓN 1: Usamos las variables globales (bg-background) en lugar de bg-black
+    <div className="min-h-screen bg-background text-foreground">
       
       <Preloader />
 
@@ -20,16 +20,18 @@ export default function Home() {
         {/* Catálogo de productos */}
         <section id="productos" className="py-32 px-6 max-w-7xl mx-auto relative">
            
-           {/* EFECTO DE LUZ: Brillo sutil blanco/platino para combinar con el nuevo estilo */}
-           <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-white/5 blur-[100px] rounded-full pointer-events-none" />
+           {/* CORRECCIÓN 2: El brillo ahora es Púrpura (secondary) suave para que se vea sobre blanco */}
+           <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-secondary/15 blur-[100px] rounded-full pointer-events-none" />
 
            <div className="text-center mb-24 relative z-10">
-              <span className="inline-block py-1 px-3 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-[10px] font-bold tracking-[0.4em] uppercase mb-6 backdrop-blur-md">
+              {/* Badge actualizado: Borde gris suave y texto gris oscuro */}
+              <span className="inline-block py-1 px-3 rounded-full border border-zinc-200 bg-zinc-50 text-zinc-500 text-[10px] font-bold tracking-[0.4em] uppercase mb-6 backdrop-blur-md">
                 Colección Esencial
               </span>
               
-              <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter mt-2">
-                El arte de cuidar <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-500">tu piel</span>
+              {/* Título actualizado: Texto oscuro y el énfasis en Magenta (Primary) */}
+              <h2 className="text-4xl md:text-6xl font-bold text-foreground tracking-tighter mt-2">
+                El arte de cuidar <span className="text-primary">tu piel</span>
               </h2>
            </div>
            

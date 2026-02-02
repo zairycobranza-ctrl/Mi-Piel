@@ -22,10 +22,11 @@ export default function Benefits() {
   ];
 
   return (
-    <section className="py-24 border-t border-white/10 bg-black relative overflow-hidden">
+    // CAMBIO: Fondo gris muy claro (zinc-50) y borde gris suave (zinc-200)
+    <section className="py-24 border-t border-zinc-200 bg-zinc-50 relative overflow-hidden">
       
-      {/* Decoración de fondo sutil */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#EF5DA8]/50 to-transparent opacity-30" />
+      {/* Decoración de fondo: Línea degradada en color Primary (Magenta) */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-50" />
 
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -38,17 +39,22 @@ export default function Benefits() {
               viewport={{ once: true }}
               className="flex flex-col items-center text-center md:items-start md:text-left group cursor-default"
             >
-              {/* ICONO: Aclarado el color base a zinc-400 (antes 500) */}
-              <div className="mb-6 p-5 rounded-2xl bg-zinc-900 border border-white/10 text-zinc-400 group-hover:text-[#EF5DA8] group-hover:border-[#EF5DA8]/50 group-hover:shadow-[0_0_20px_rgba(239,93,168,0.2)] transition-all duration-500 ease-out">
+              {/* ICONO: 
+                  - Fondo blanco (bg-white)
+                  - Borde gris suave (border-zinc-200)
+                  - Icono gris (text-zinc-400) -> Hover Magenta (text-primary)
+              */}
+              <div className="mb-6 p-5 rounded-2xl bg-white border border-zinc-200 text-zinc-400 group-hover:text-primary group-hover:border-primary/50 group-hover:shadow-[0_0_20px_rgba(194,30,120,0.15)] transition-all duration-500 ease-out shadow-sm">
                 {benefit.icon}
               </div>
 
-              <h4 className="text-xs uppercase tracking-[0.2em] font-bold text-white mb-3 group-hover:text-[#EF5DA8] transition-colors duration-300">
+              {/* TÍTULO: Color oscuro (text-foreground) -> Hover Magenta */}
+              <h4 className="text-xs uppercase tracking-[0.2em] font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
                 {benefit.title}
               </h4>
               
-              {/* DESCRIPCIÓN: Aclarada a zinc-300 para mejor lectura */}
-              <p className="text-sm text-zinc-300 leading-relaxed max-w-[280px] font-light">
+              {/* DESCRIPCIÓN: Gris intermedio para lectura (text-zinc-600) */}
+              <p className="text-sm text-zinc-600 leading-relaxed max-w-[280px] font-light">
                 {benefit.description}
               </p>
             </motion.div>

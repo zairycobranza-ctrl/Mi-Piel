@@ -9,11 +9,8 @@ module.exports = {
       fontFamily: {
         serif: ['var(--font-serif)', 'serif'],
       },
-      colors: {
-        brand: {
-          pink: "#EF5DA8", // Color rosa de MIPIEL
-        }
-      }
+      // NOTA: Los colores ya los definimos en globals.css
+      // Dejamos esto vacío para que lea los del CSS
     },
   },
   plugins: [],

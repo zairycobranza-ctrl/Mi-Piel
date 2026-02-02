@@ -1,11 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  /* Definimos variables del tema aquí */
+  /* Mantenemos tus fuentes originales */
   --font-serif: var(--font-serif);
-  --color-brand-pink: #EF5DA8;
-  
-  /* Animaciones personalizadas registradas en el tema */
+
+  /* --- DEFINIMOS TUS NUEVOS COLORES AQUÍ --- */
+  /* Al ponerlos en @theme, Tailwind v4 los detecta automáticamente */
+  --color-primary: #C21E78;    /* Magenta */
+  --color-secondary: #9F5FB1;  /* Púrpura */
+  --color-background: #FFFFFF; /* Fondo Blanco */
+  --color-foreground: #2B2E35; /* Texto Oscuro */
+
+  /* Animaciones originales (No las tocamos) */
   --animate-spin-slow: spin-slow 20s linear infinite;
   --animate-spin-reverse: spin-reverse 25s linear infinite;
 
@@ -13,63 +19,25 @@
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
-
   @keyframes spin-reverse {
     from { transform: rotate(360deg); }
     to { transform: rotate(0deg); }
   }
 }
 
-/* --- ESTILOS GLOBALES (CSS Estándar) --- */
-
-:root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
+/* --- ESTILOS DEL BODY --- */
 body {
-  /* Usamos CSS normal en lugar de @apply para evitar errores de compilación */
-  background-color: black;
-  color: white;
-  overflow-x: hidden; /* Evita el baile horizontal en móviles */
+  /* Usamos las variables definidas arriba */
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Estilos de selección de texto (Rosa Neón) */
-::selection {
-  background-color: #EF5DA8;
-  color: white;
-}
-
-/* --- BARRA DE SCROLL DE LUJO --- */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #09090b; /* Zinc-950 */
-}
-
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #EF5DA8; /* Se ilumina en rosa al tocarla */
-}
-
-/* --- UTILIDADES --- */
-@utility text-balance {
-  text-wrap: balance;
-}
-
-@utility writing-vertical {
-  writing-mode: vertical-rl;
-}
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }

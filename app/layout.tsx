@@ -12,12 +12,12 @@ import CartSidebar from "./components/CartSidebar";    // Panel visual del carri
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const serif = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
 
-// 1. BARRA DE NAVEGADOR NEGRA (Móviles)
+// 1. BARRA DE NAVEGADOR (Actualizada para modo claro)
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#FFFFFF", // Antes era negro, ahora blanco para combinar con el fondo
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1, // Evita zoom indeseado en inputs en iOS
+  maximumScale: 1,
 };
 
 // 2. TÍTULO Y METADATOS
@@ -28,7 +28,9 @@ export const metadata: Metadata = {
   },
   description: "Cosmética biotecnológica y natural. Cuidado de la piel con ingredientes puros y ciencia avanzada.",
   icons: {
-    icon: "/img/logo-mipiel-white.png",
+    // OJO: Como ahora el fondo es blanco, asegúrate de que este icono se vea bien.
+    // Si es blanco transparente, quizás no se vea. Deberías usar el logo negro aquí si es necesario.
+    icon: "/img/logo-mipiel-white.png", 
   },
 };
 
@@ -39,7 +41,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={`${inter.variable} ${serif.variable}`}>
-      <body className="bg-black text-white antialiased selection:bg-[#EF5DA8] selection:text-white font-sans">
+      {/* CAMBIOS AQUÍ:
+         - bg-background: Usa tu variable blanca
+         - text-foreground: Usa tu variable gris oscura
+         - selection:bg-secondary: Usa tu variable púrpura al seleccionar texto
+      */}
+      <body className="bg-background text-foreground antialiased selection:bg-secondary selection:text-white font-sans">
         
         {/* ENVOLVEMOS TODA LA APP CON EL CART PROVIDER */}
         <CartProvider>
