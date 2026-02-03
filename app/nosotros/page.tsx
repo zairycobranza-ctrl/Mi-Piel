@@ -1,146 +1,181 @@
 "use client";
 
 import { Target, Eye, Leaf, ShieldCheck, Award } from "lucide-react";
+import { motion } from "framer-motion";
 
-// CORRECCIÓN DE RUTAS: Usamos "../" para subir un nivel y encontrar la carpeta components
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+// NOTA: Borramos Header y Footer de aquí porque ya cargan en el layout.tsx
+// Si los dejamos, saldrán duplicados.
 
 export default function QuienesSomosPage() {
   return (
-    // Fondo negro Dark Luxury
-    <div className="bg-black min-h-screen text-white selection:bg-[#EF5DA8] selection:text-white">
+    // Mantenemos el fondo blanco y la selección fucsia
+    <div className="bg-white min-h-screen text-zinc-800 selection:bg-[#E5007E] selection:text-white">
       
-      {/* 1. HEADER (Barra de Navegación) */}
-      <Header />
-
       <main>
-        {/* HERO SECTION - Título Principal */}
+        {/* HERO SECTION */}
         <section className="pt-40 pb-20 px-6 relative overflow-hidden">
-          {/* Luz ambiental de fondo */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#EF5DA8]/10 blur-[120px] rounded-full pointer-events-none" />
+          {/* Mancha de luz fucsia ambiental */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#E5007E]/5 blur-[100px] rounded-full pointer-events-none" />
           
           <div className="max-w-5xl mx-auto text-center relative z-10">
-            <span className="inline-block py-1 px-3 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-[10px] font-bold tracking-[0.4em] uppercase mb-8 backdrop-blur-md">
-              Nuestra Identidad
-            </span>
-            <h1 className="text-5xl md:text-7xl font-serif text-white mb-8 tracking-tight">
-              El arte de tu piel <br />
-              <span className="italic text-zinc-500 font-light">en nuestras manos.</span>
-            </h1>
+            <motion.div
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8 }}
+            >
+              <span className="inline-block py-1.5 px-4 rounded-full border border-[#E5007E]/20 bg-white text-[#E5007E] text-[10px] font-bold tracking-[0.4em] uppercase mb-8 shadow-sm">
+                Nuestra Identidad
+              </span>
+              <h1 className="text-5xl md:text-7xl font-serif text-zinc-900 mb-6 tracking-tight">
+                El arte de tu piel <br />
+                <span className="italic text-[#E5007E] font-light">en buenas manos.</span>
+              </h1>
+            </motion.div>
           </div>
         </section>
 
-        {/* MISIÓN */}
-        <section className="py-24 px-6 max-w-7xl mx-auto">
+        {/* SECCIÓN MISIÓN */}
+        <section className="py-20 px-6 max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
+            
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="space-y-8"
+            >
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-zinc-900 rounded-full border border-white/10 text-[#EF5DA8]">
-                   <Target size={24} strokeWidth={1.5} />
+                <div className="p-3 bg-white rounded-full border border-zinc-100 shadow-lg text-[#E5007E]">
+                   <Target size={28} strokeWidth={1.5} />
                 </div>
-                <h2 className="text-3xl font-serif text-white">Misión</h2>
+                <h2 className="text-4xl font-serif text-zinc-900 font-bold">Misión</h2>
               </div>
               
-              <div className="space-y-6 text-lg font-light leading-relaxed">
-                <p className="text-zinc-300">
-                  Nuestra misión en <span className="font-bold text-white border-b border-[#EF5DA8]">MIPIEL</span> es mejorar la calidad de vida de nuestros clientes, ofreciendo soluciones innovadoras y accesibles para el cuidado personal. 
+              <div className="space-y-6 text-base md:text-lg font-light leading-relaxed text-zinc-600 text-justify">
+                <p>
+                  Nuestra misión en <strong className="text-[#E5007E]">MIPIEL</strong> es mejorar la calidad de vida de nuestros clientes, ofreciendo soluciones innovadoras y accesibles para el cuidado personal.
                 </p>
-                <p className="text-zinc-500">
-                  Nos comprometemos a desarrollar productos de alta calidad, elaborados con ingredientes naturales y respaldados por la ciencia que satisfagan las necesidades específicas de cada persona.
+                <p>
+                  Nos comprometemos a desarrollar productos de alta calidad, elaborados con ingredientes naturales y respaldados por la ciencia que satisfagan las necesidades específicas de cada persona. Buscamos fomentar la confianza y el bienestar promoviendo hábitos de cuidado personal saludables y sostenibles.
+                </p>
+                <p>
+                  Nos esforzamos por ser una empresa responsable y comprometida con el medio ambiente, minimizando nuestro impacto y contribuyendo al desarrollo de las comunidades donde operamos. En MIPIEL, creemos que todos merecen sentirse bien consigo mismos, y trabajamos cada día para hacerlo posible.
                 </p>
               </div>
-            </div>
+            </motion.div>
             
-            {/* Imagen Misión (Placeholder Oscuro) */}
-            <div className="relative group aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900">
-              <div className="absolute inset-0 flex items-center justify-center text-zinc-700 font-bold uppercase tracking-widest">
-                 [Imagen Misión]
-              </div>
-              {/* Descomenta la linea de abajo si tienes una imagen */}
-              {/* <img src="/tu-imagen.jpg" className="object-cover w-full h-full opacity-60 hover:opacity-100 transition-opacity" /> */}
-            </div>
+            {/* IMAGEN MISIÓN: Bodegón de productos y naturaleza */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="relative aspect-[4/5] md:aspect-square rounded-2xl overflow-hidden bg-zinc-100 shadow-2xl shadow-pink-500/10"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=2070&auto=format&fit=crop" 
+                alt="Nuestra Misión - Productos MIPIEL" 
+                className="object-cover w-full h-full hover:scale-105 transition-transform duration-700"
+              />
+            </motion.div>
           </div>
         </section>
 
-        {/* VISIÓN */}
-        <section className="py-24 px-6 relative">
-          <div className="absolute inset-0 bg-zinc-900/20 skew-y-3 transform origin-top-left -z-10" />
-
+        {/* SECCIÓN VISIÓN */}
+        <section className="py-20 px-6 relative bg-zinc-50/80">
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-             {/* Imagen Visión (Placeholder Oscuro) */}
-            <div className="order-2 md:order-1 relative aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group">
-              <div className="absolute inset-0 flex items-center justify-center text-zinc-700 font-bold uppercase tracking-widest">
-                 [Imagen Visión]
-              </div>
-            </div>
+             
+            {/* IMAGEN VISIÓN: Textura de serum */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="order-2 md:order-1 relative aspect-[4/5] md:aspect-square rounded-2xl overflow-hidden bg-white shadow-2xl shadow-pink-500/10"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1617897903246-719242758050?q=80&w=1974&auto=format&fit=crop" 
+                alt="Nuestra Visión - Tecnología y Pureza" 
+                className="object-cover w-full h-full hover:scale-105 transition-transform duration-700"
+              />
+            </motion.div>
             
-            <div className="order-1 md:order-2 space-y-8">
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="order-1 md:order-2 space-y-8"
+            >
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-zinc-900 rounded-full border border-white/10 text-[#EF5DA8]">
-                  <Eye size={24} strokeWidth={1.5} />
+                <div className="p-3 bg-white rounded-full border border-zinc-100 shadow-lg text-[#E5007E]">
+                  <Eye size={28} strokeWidth={1.5} />
                 </div>
-                <h2 className="text-3xl font-serif text-white">Visión</h2>
+                <h2 className="text-4xl font-serif text-zinc-900 font-bold">Visión</h2>
               </div>
               
-              <div className="space-y-6 text-lg font-light leading-relaxed">
-                <p className="text-zinc-300">
-                  Ser la marca líder en soluciones para el cuidado personal, reconocida por su compromiso con la salud y el bienestar. 
+              <div className="space-y-6 text-base md:text-lg font-light leading-relaxed text-zinc-600 text-justify">
+                <p>
+                  Nuestra visión en <strong className="text-[#E5007E]">MIPIEL</strong> es ser la marca líder en soluciones para el cuidado personal, reconocida por su compromiso con la salud y el bienestar de nuestros clientes.
                 </p>
-                <div className="border-l-2 border-[#EF5DA8] pl-6 py-2">
-                  <p className="text-zinc-400 italic">
-                    "Buscamos innovar constantemente, combinando tecnología avanzada para ofrecer resultados eficaces y seguros."
+                <p>
+                  Buscamos innovar constantemente, desarrollando productos de alta calidad que combinen ingredientes naturales y tecnología avanzada para ofrecer resultados eficaces y seguros. Aspiramos a construir una comunidad de personas que confían en Mipiel para sentirse bien consigo mismas.
+                </p>
+                <div className="border-l-4 border-[#E5007E] pl-6 py-2 bg-white rounded-r-lg shadow-sm">
+                  <p className="text-zinc-500 italic text-sm">
+                    "Creemos que el cuidado personal es un derecho, no un lujo, y trabajamos cada día para hacerlo accesible a todos."
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
         {/* VALORES / PILARES */}
         <section className="py-32 px-6 max-w-7xl mx-auto">
           <div className="text-center mb-20">
-            <span className="text-[10px] font-bold tracking-[0.4em] text-zinc-500 uppercase block mb-4">
+            <span className="text-[10px] font-bold tracking-[0.4em] text-[#E5007E] uppercase block mb-4">
               Nuestros Pilares
             </span>
-            <h2 className="text-4xl font-serif text-white">ADN de la Marca</h2>
+            <h2 className="text-4xl md:text-5xl font-serif text-zinc-900">ADN de la Marca</h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Pilar 1 */}
-            <div className="group p-8 rounded-2xl border border-white/5 bg-zinc-900/50 hover:bg-zinc-900 hover:border-[#EF5DA8]/30 transition-all duration-300 text-center">
-              <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto text-[#EF5DA8] mb-6 border border-white/10 group-hover:border-[#EF5DA8]">
-                <Leaf size={28} strokeWidth={1.5} />
+            {/* Pilar 1: Natural */}
+            <div className="group p-10 rounded-2xl bg-white border border-zinc-100 hover:border-[#E5007E]/30 hover:shadow-xl hover:shadow-pink-500/5 transition-all duration-300 text-center">
+              <div className="w-16 h-16 bg-zinc-50 rounded-full flex items-center justify-center mx-auto text-[#E5007E] mb-6 group-hover:scale-110 transition-transform">
+                <Leaf size={32} strokeWidth={1.5} />
               </div>
-              <h3 className="font-bold uppercase tracking-widest text-sm text-white mb-3">Natural</h3>
-              <p className="text-zinc-400 text-sm font-light">Ingredientes botánicos puros de alta eficacia y origen trazable.</p>
+              <h3 className="font-bold uppercase tracking-widest text-sm text-zinc-900 mb-3">Natural</h3>
+              <p className="text-zinc-500 text-sm font-light leading-relaxed">
+                Ingredientes botánicos puros de alta eficacia y origen trazable, respetando la naturaleza de tu piel.
+              </p>
             </div>
 
-            {/* Pilar 2 */}
-            <div className="group p-8 rounded-2xl border border-white/5 bg-zinc-900/50 hover:bg-zinc-900 hover:border-[#EF5DA8]/30 transition-all duration-300 text-center">
-              <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto text-[#EF5DA8] mb-6 border border-white/10 group-hover:border-[#EF5DA8]">
-                <ShieldCheck size={28} strokeWidth={1.5} />
+            {/* Pilar 2: Responsable */}
+            <div className="group p-10 rounded-2xl bg-white border border-zinc-100 hover:border-[#E5007E]/30 hover:shadow-xl hover:shadow-pink-500/5 transition-all duration-300 text-center">
+              <div className="w-16 h-16 bg-zinc-50 rounded-full flex items-center justify-center mx-auto text-[#E5007E] mb-6 group-hover:scale-110 transition-transform">
+                <ShieldCheck size={32} strokeWidth={1.5} />
               </div>
-              <h3 className="font-bold uppercase tracking-widest text-sm text-white mb-3">Responsable</h3>
-              <p className="text-zinc-400 text-sm font-light">Comprometidos con el desarrollo sostenible de nuestras comunidades.</p>
+              <h3 className="font-bold uppercase tracking-widest text-sm text-zinc-900 mb-3">Responsable</h3>
+              <p className="text-zinc-500 text-sm font-light leading-relaxed">
+                Comprometidos con el desarrollo sostenible, minimizando nuestro impacto ambiental y social.
+              </p>
             </div>
 
-            {/* Pilar 3 */}
-            <div className="group p-8 rounded-2xl border border-white/5 bg-zinc-900/50 hover:bg-zinc-900 hover:border-[#EF5DA8]/30 transition-all duration-300 text-center">
-              <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto text-[#EF5DA8] mb-6 border border-white/10 group-hover:border-[#EF5DA8]">
-                <Award size={28} strokeWidth={1.5} />
+            {/* Pilar 3: Calidad */}
+            <div className="group p-10 rounded-2xl bg-white border border-zinc-100 hover:border-[#E5007E]/30 hover:shadow-xl hover:shadow-pink-500/5 transition-all duration-300 text-center">
+              <div className="w-16 h-16 bg-zinc-50 rounded-full flex items-center justify-center mx-auto text-[#E5007E] mb-6 group-hover:scale-110 transition-transform">
+                <Award size={32} strokeWidth={1.5} />
               </div>
-              <h3 className="font-bold uppercase tracking-widest text-sm text-white mb-3">Calidad</h3>
-              <p className="text-zinc-400 text-sm font-light">Formulaciones certificadas y respaldadas por la ciencia cosmética.</p>
+              <h3 className="font-bold uppercase tracking-widest text-sm text-zinc-900 mb-3">Calidad</h3>
+              <p className="text-zinc-500 text-sm font-light leading-relaxed">
+                Formulaciones certificadas y respaldadas por la ciencia para ofrecerte resultados seguros y visibles.
+              </p>
             </div>
           </div>
         </section>
       </main>
-
-      {/* 2. FOOTER */}
-      <Footer />
       
     </div>
   );
 }
-
